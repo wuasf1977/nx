@@ -17,6 +17,6 @@ RUN apt-get update && \
 # copy files from the repository into this staging server
 COPY . .
 
-RUN docker build -t image .
-RUN docker run -d -p 80:80 image
+RUN docker build -t image1 .
+RUN docker run -d -p 80:80 image1
 EXPOSE WEBSITE http://localhost:80
