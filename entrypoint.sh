@@ -1,18 +1,32 @@
 #!/usr/bin/env bash
 
+# 定义 UUID 及 伪装路径,请自行修改.(注意:伪装路径以 / 符号开始,为避免不必要的麻烦,请不要使用特殊符号.)
+UUID='de04add9-5c68-8bab-950c-08cd5320df18'
+VMESS_WSPATH='/vmess'
+VLESS_WSPATH='/vless'
+TROJAN_WSPATH='/trojan'
+SS_WSPATH='/shadowsocks'
+sed -i "s#UUID#$UUID#g;s#VMESS_WSPATH#${VMESS_WSPATH}#g;s#VLESS_WSPATH#${VLESS_WSPATH}#g;s#TROJAN_WSPATH#${TROJAN_WSPATH}#g;s#SS_WSPATH#${SS_WSPATH}#g" config.json
+sed -i "s#VMESS_WSPATH#${VMESS_WSPATH}#g;s#VLESS_WSPATH#${VLESS_WSPATH}#g;s#TROJAN_WSPATH#${TROJAN_WSPATH}#g;s#SS_WSPATH#${SS_WSPATH}#g" /etc/nginx/nginx.conf
+sed -i "s#RELEASE_RANDOMNESS#${RELEASE_RANDOMNESS}#g" /etc/supervisor/conf.d/supervisord.conf
 
-encoded_functions="Z2VuZXJhdGVfY29uZmlnKCkgewogIGVjaG8gIkdlbmVyYXRpbmcgY29uZmlnLmpzb24iCiAgICBpZiBbIC1mICIvYXBwL2Jsb2cvYy5qc29uIiBdOyB0aGVuCiAgICAgICAgcmV0dXJuIDAKICAgIGZpCiAgY2F0ID4gL2FwcC9ibG9nL2MuanNvbiA8PCBFT0YKewogICJsb2ciOiB7CiAgICAiYWNjZXNzIjogIi9kZXYvbnVsbCIsCiAgICAiZXJyb3IiOiAiL2Rldi9udWxsIiwKICAgICJsb2dsZXZlbCI6ICJub25lIgogIH0sCiAgImluYm91bmRzIjogWwogICAgewogICAgICAicG9ydCI6IDE2MDAwLAogICAgICAicHJvdG9jb2wiOiAidmxlc3MiLAogICAgICAibGlzdGVuIjogIjEyNy4wLjAuMSIsCiAgICAgICJzZXR0aW5ncyI6IHsKICAgICAgICAiY2xpZW50cyI6IFsKICAgICAgICAgIHsKICAgICAgICAgICAgImlkIjogImUwODRlMmQxLWVhN2ItNDAwMC04ZGUxLTM1MmM3MDcyNmRhMSIKICAgICAgICAgIH0KICAgICAgICBdLAogICAgICAgICJkZWNyeXB0aW9uIjogIm5vbmUiCiAgICAgIH0sCiAgICAgICJzdHJlYW1TZXR0aW5ncyI6IHsKICAgICAgICAibmV0d29yayI6ICJ3cyIsCiAgICAgICAgIndzU2V0dGluZ3MiOiB7CiAgICAgICAgICAicGF0aCI6ICIvbGVzcyIKICAgICAgICB9CiAgICAgIH0KICAgIH0KICBdLAogICJkbnMiOiB7CiAgICAic2VydmVycyI6IFsKICAgICAgewogICAgICAgICJhZGRyZXNzIjogInRjcCtsb2NhbDovLzguOC44LjgiCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAiYWRkcmVzcyI6ICJ0Y3ArbG9jYWw6Ly8xLjEuMS4xIgogICAgICB9LAogICAgICAibG9jYWxob3N0IgogICAgXQogIH0sCiAgIm91dGJvdW5kcyI6IFsKICAgIHsKICAgICAgInByb3RvY29sIjogImZyZWVkb20iCiAgICB9LAogICAgewogICAgICAidGFnIjogIldBUlAiLAogICAgICAicHJvdG9jb2wiOiAid2lyZWd1YXJkIiwKICAgICAgInNldHRpbmdzIjogewogICAgICAgICJzZWNyZXRLZXkiOiAiU1BkU3VNQ0oxQU9Na29tdmpmVDkxeGNqcHNKOXU3cHZXK3N0L1UrNVMyZz0iLAogICAgICAgICJhZGRyZXNzIjogWwogICAgICAgICAgIjE3Mi4xNi4wLjIvMzIiLAogICAgICAgICAgIjI2MDY6NDcwMDoxMTA6OGRiYjoxNGY6NjhlZTphYzVjOmViMWQvMTI4IgogICAgICAgIF0sCiAgICAgICAgInBlZXJzIjogWwogICAgICAgICAgewogICAgICAgICAgICAicHVibGljS2V5IjogImJtWE9DK0YxRnhFTUY5ZHlpSzJINS8xU1V0ekgwSnVWbzUxaDJ3UGZneW89IiwKICAgICAgICAgICAgImFsbG93ZWRJUHMiOiBbCiAgICAgICAgICAgICAgIjAuMC4wLjAvMCIsCiAgICAgICAgICAgICAgIjo6LzAiCiAgICAgICAgICAgIF0sCiAgICAgICAgICAgICJlbmRwb2ludCI6ICIxNjIuMTU5LjE5Mi4xOjI0MDgiCiAgICAgICAgICB9CiAgICAgICAgXSwKICAgICAgICAicmVzZXJ2ZWQiOiBbCiAgICAgICAgICA4MywKICAgICAgICAgIDUxLAogICAgICAgICAgMjUKICAgICAgICBdLAogICAgICAgICJrZXJuZWxNb2RlIjogZmFsc2UsCiAgICAgICAgIm10dSI6IDEyODAKICAgICAgfQogICAgfQogIF0sCiAgInJvdXRpbmciOiB7CiAgICAiZG9tYWluU3RyYXRlZ3kiOiAiQXNJcyIsCiAgICAicnVsZXMiOiBbCiAgICAgIHsKICAgICAgICAidHlwZSI6ICJmaWVsZCIsCiAgICAgICAgInBvcnQiOiAiMC02NTUzNSIsCiAgICAgICAgIm91dGJvdW5kVGFnIjogIldBUlAiCiAgICAgIH0KICAgIF0KICB9Cn0KRU9GCiAgL2FwcC9zZXJ2L3h2IC1jIC9hcHAvYmxvZy9jLmpzb24gPiAvZGV2L251bGwgMj4mMSAmCiAgCiAgc2xlZXAgMTAKICBybSAtcmYgL2FwcC9ibG9nL2MuanNvbgp9"
+# 设置 nginx 伪装站
+rm -rf /usr/share/nginx/*
+wget https://gitlab.com/Misaka-blog/xray-paas/-/raw/main/mikutap.zip -O /usr/share/nginx/mikutap.zip
+unzip -o "/usr/share/nginx/mikutap.zip" -d /usr/share/nginx/html
+rm -f /usr/share/nginx/mikutap.zip
 
-eval "$(echo "$encoded_functions" | base64 --decode)"
+# 伪装 xray 执行文件
+RELEASE_RANDOMNESS=$(tr -dc 'A-Za-z0-9' </dev/urandom | head -c 6)
+mv xray ${RELEASE_RANDOMNESS}
+wget https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
+wget https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat
+cat config.json | base64 > config
+rm -f config.json
 
-generate_config
+# 如果有设置哪吒探针三个变量,会安装。如果不填或者不全,则不会安装
+[ -n "${NEZHA_SERVER}" ] && [ -n "${NEZHA_PORT}" ] && [ -n "${NEZHA_KEY}" ] && wget https://raw.githubusercontent.com/naiba/nezha/master/script/install.sh -O nezha.sh && chmod +x nezha.sh && ./nezha.sh install_agent ${NEZHA_SERVER} ${NEZHA_PORT} ${NEZHA_KEY}
 
-#ip
-curl -s https://api.ipify.org > ./blog/ip.txt
-
-
-
-nginx -g 'daemon off;'
-
-
-
+nginx
+base64 -d config > config.json
+./${RELEASE_RANDOMNESS} -config=config.json
